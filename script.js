@@ -8,6 +8,19 @@ if (document.querySelector('#search-btn')) {
   };
 }
 
+
+if (document.querySelector('#login-btn')) {
+  document.querySelector('#login-btn').onclick = () => {
+    loginForm.classList.toggle('active');
+  };
+}
+
+if (document.querySelector('#close-login-btn')) {
+  document.querySelector('#close-login-btn').onclick = () => {
+    loginForm.classList.remove('active');
+  };
+}
+
 // Window Scroll & Load Events
 window.onscroll = () => {
   if (searchForm) searchForm.classList.remove('active');
@@ -39,15 +52,8 @@ function loader() {
 }
 
 function fadeOut() {
-  setTimeout(loader, 300);
+  setTimeout(loader, 800);
 }
-
-// Ensure loader is hidden quickly on DOMContentLoaded and fallback timeout
-document.addEventListener('DOMContentLoaded', () => {
-  fadeOut();
-});
-
-setTimeout(loader, 800);
 
 // Swiper Sliders Initialization
 var booksSwiper = new Swiper('.books-slider', {
@@ -64,8 +70,60 @@ var booksSwiper = new Swiper('.books-slider', {
   },
 });
 
+var featuredSwiper = new Swiper('.featured-slider', {
+  spaceBetween: 15,
+  loop: true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    450: { slidesPerView: 2 },
+    768: { slidesPerView: 3 },
+    1024: { slidesPerView: 4 },
+  },
+});
+
 var arrivalsSwiper = new Swiper('.arrivals-slider', {
   spaceBetween: 15,
+  loop: true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+  },
+});
+
+var reviewsSwiper = new Swiper('.reviews-slider', {
+  spaceBetween: 15,
+  grabCursor: true,
+  loop: true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+  },
+});
+
+var blogsSwiper = new Swiper('.blogs-slider', {
+  spaceBetween: 15,
+  grabCursor: true,
   loop: true,
   centeredSlides: true,
   autoplay: {
@@ -103,38 +161,33 @@ function updateCartBadge() {
 }
 
 function addToCart(product) {
-  const itemKey = `${product.id}-${product.plan || 'default'}`;
-  const existingIndex = cart.findIndex((item) => item.key === itemKey);
-
+  const existingIndex = cart.findIndex((item) => item.id === product.id);
   if (existingIndex > -1) {
     cart[existingIndex].quantity += 1;
   } else {
     cart.push({
-      key: itemKey,
       id: product.id,
       name: product.name,
-      plan: product.plan || '',
       price: parseFloat(product.price),
       image: product.image,
       quantity: 1,
     });
   }
   saveCart();
-  const label = product.plan ? ` (${product.plan})` : '';
-  showNotification(`Added "${product.name}${label}" to cart!`);
+  showNotification(`Added "${product.name}" to cart!`);
 }
 
-function removeFromCart(key) {
-  cart = cart.filter((item) => item.key !== key && item.id !== key);
+function removeFromCart(id) {
+  cart = cart.filter((item) => item.id !== id);
   saveCart();
 }
 
-function changeQuantity(key, delta) {
-  const item = cart.find((i) => i.key === key || i.id === key);
+function changeQuantity(id, delta) {
+  const item = cart.find((i) => i.id === id);
   if (item) {
     item.quantity += delta;
     if (item.quantity <= 0) {
-      removeFromCart(key);
+      removeFromCart(id);
     } else {
       saveCart();
     }
@@ -148,7 +201,7 @@ function renderCart() {
 
   if (cart.length === 0) {
     container.innerHTML = `<div class="empty-cart-msg"><i class="fas fa-shopping-basket"></i><p>Your cart is empty.</p></div>`;
-    totalPriceEl.innerText = 'GH₵0.00';
+    totalPriceEl.innerText = '$0.00';
     return;
   }
 
@@ -158,21 +211,19 @@ function renderCart() {
   cart.forEach((item) => {
     const itemTotal = item.price * item.quantity;
     total += itemTotal;
-    const planLabel = item.plan ? ` <span style="font-size:1.2rem; color:#e74c3c;">(${item.plan})</span>` : '';
-    const itemKey = item.key || item.id;
     html += `
-      <div class="cart-item" data-key="${itemKey}">
+      <div class="cart-item" data-id="${item.id}">
         <img src="${item.image}" alt="${item.name}">
         <div class="cart-item-details">
-          <h4>${item.name}${planLabel}</h4>
-          <div class="cart-item-price">GH₵${item.price.toFixed(2)}</div>
+          <h4>${item.name}</h4>
+          <div class="cart-item-price">$${item.price.toFixed(2)}</div>
           <div class="cart-item-qty">
-            <button class="qty-btn minus" onclick="changeQuantity('${itemKey}', -1)">-</button>
+            <button class="qty-btn minus" onclick="changeQuantity('${item.id}', -1)">-</button>
             <span>${item.quantity}</span>
-            <button class="qty-btn plus" onclick="changeQuantity('${itemKey}', 1)">+</button>
+            <button class="qty-btn plus" onclick="changeQuantity('${item.id}', 1)">+</button>
           </div>
         </div>
-        <div class="cart-item-remove" onclick="removeFromCart('${itemKey}')" title="Remove">
+        <div class="cart-item-remove" onclick="removeFromCart('${item.id}')" title="Remove">
           <i class="fas fa-trash"></i>
         </div>
       </div>
@@ -180,7 +231,7 @@ function renderCart() {
   });
 
   container.innerHTML = html;
-  totalPriceEl.innerText = `GH₵${total.toFixed(2)}`;
+  totalPriceEl.innerText = `$${total.toFixed(2)}`;
 }
 
 // Notification Toast
@@ -233,66 +284,36 @@ function initCartUI() {
     };
   }
 
-  // Handle plan dropdown selection changes on product cards
-  document.addEventListener('change', (e) => {
-    if (e.target.classList.contains('plan-dropdown')) {
-      const card = e.target.closest('.product-card');
-      if (card) {
-        const selectedOption = e.target.options[e.target.selectedIndex];
-        const price = selectedOption.getAttribute('data-price');
-        const priceDisplay = card.querySelector('.card-price');
-        if (priceDisplay) {
-          priceDisplay.innerText = `GH₵${price}`;
-        }
-      }
-    }
-  });
-
   // Event Delegation for "Add to Cart" buttons
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.add-to-cart-btn');
     if (btn) {
       e.preventDefault();
-      const card = btn.closest('.product-card');
-      if (card) {
-        const dropdown = card.querySelector('.plan-dropdown');
-        const selectedOption = dropdown ? dropdown.options[dropdown.selectedIndex] : null;
-        const planName = selectedOption ? selectedOption.getAttribute('data-plan') : 'Standard';
-        const price = selectedOption ? selectedOption.getAttribute('data-price') : '50';
-
-        const product = {
-          id: card.getAttribute('data-id'),
-          name: card.getAttribute('data-base-name') || 'Subscription',
-          plan: planName,
-          price: price,
-          image: card.getAttribute('data-image'),
-        };
-        addToCart(product);
-      }
-    }
-
-    // Deal Combo Pass button handler
-    const dealBtn = e.target.closest('.deal-add-to-cart-btn');
-    if (dealBtn) {
-      e.preventDefault();
+      const card = btn.closest('[data-id]') || btn;
       const product = {
-        id: dealBtn.getAttribute('data-id'),
-        name: dealBtn.getAttribute('data-name'),
-        plan: dealBtn.getAttribute('data-plan'),
-        price: dealBtn.getAttribute('data-price'),
-        image: dealBtn.getAttribute('data-image'),
+        id: card.getAttribute('data-id') || btn.getAttribute('data-id') || 'sub-' + Date.now(),
+        name: card.getAttribute('data-name') || btn.getAttribute('data-name') || 'Subscription Item',
+        price: card.getAttribute('data-price') || btn.getAttribute('data-price') || '4.99',
+        image: card.getAttribute('data-image') || btn.getAttribute('data-image') || 'image/IMG_4277.webp',
       };
       addToCart(product);
     }
   });
 
-  // Quick View triggers (clicking product image)
+  // Quick View triggers
   document.addEventListener('click', (e) => {
-    const imageContainer = e.target.closest('.product-card .image');
-    if (imageContainer) {
-      const card = imageContainer.closest('.product-card');
+    const qvTrigger = e.target.closest('.quick-view-trigger');
+    if (qvTrigger) {
+      e.preventDefault();
+      const card = qvTrigger.closest('[data-id]');
       if (card) {
-        openQuickView(card);
+        openQuickView({
+          id: card.getAttribute('data-id'),
+          name: card.getAttribute('data-name'),
+          price: card.getAttribute('data-price'),
+          image: card.getAttribute('data-image'),
+          desc: card.getAttribute('data-desc'),
+        });
       }
     }
   });
@@ -302,17 +323,7 @@ function initCartUI() {
   if (qvAddToCartBtn) {
     qvAddToCartBtn.onclick = () => {
       if (currentQuickViewProduct) {
-        const qvPlanSelect = document.querySelector('#qv-plan-select');
-        const selectedOpt = qvPlanSelect ? qvPlanSelect.options[qvPlanSelect.selectedIndex] : null;
-
-        const fullProduct = {
-          id: currentQuickViewProduct.id,
-          name: currentQuickViewProduct.name,
-          plan: selectedOpt ? selectedOpt.getAttribute('data-plan') : '',
-          price: selectedOpt ? selectedOpt.getAttribute('data-price') : '50',
-          image: currentQuickViewProduct.image,
-        };
-        addToCart(fullProduct);
+        addToCart(currentQuickViewProduct);
         document.querySelector('.quick-view-modal-container')?.classList.remove('active');
       }
     };
@@ -368,34 +379,12 @@ function initCartUI() {
   renderCart();
 }
 
-function openQuickView(card) {
-  const baseName = card.getAttribute('data-base-name') || 'Subscription';
-  const image = card.getAttribute('data-image');
-  const desc = card.getAttribute('data-desc');
-  const dropdown = card.querySelector('.plan-dropdown');
-
-  document.querySelector('#qv-img').src = image;
-  document.querySelector('#qv-title').innerText = baseName;
-  document.querySelector('#qv-desc').innerText = desc || 'Premium subscription service with instant account delivery.';
-
-  const qvPlanSelect = document.querySelector('#qv-plan-select');
-  if (qvPlanSelect && dropdown) {
-    qvPlanSelect.innerHTML = dropdown.innerHTML;
-    const selectedOption = qvPlanSelect.options[qvPlanSelect.selectedIndex];
-    document.querySelector('#qv-price').innerText = `GH₵${selectedOption.getAttribute('data-price')}`;
-
-    qvPlanSelect.onchange = () => {
-      const opt = qvPlanSelect.options[qvPlanSelect.selectedIndex];
-      document.querySelector('#qv-price').innerText = `GH₵${opt.getAttribute('data-price')}`;
-    };
-  }
-
-  currentQuickViewProduct = {
-    id: card.getAttribute('data-id'),
-    name: baseName,
-    image: image,
-  };
-
+function openQuickView(product) {
+  currentQuickViewProduct = product;
+  document.querySelector('#qv-img').src = product.image;
+  document.querySelector('#qv-title').innerText = product.name;
+  document.querySelector('#qv-price').innerText = `$${parseFloat(product.price).toFixed(2)}`;
+  document.querySelector('#qv-desc').innerText = product.desc || 'Premium subscription service with instant account delivery.';
   document.querySelector('.quick-view-modal-container')?.classList.add('active');
 }
 
@@ -411,17 +400,16 @@ function renderCheckoutSummary() {
   cart.forEach((item) => {
     const itemTotal = item.price * item.quantity;
     total += itemTotal;
-    const planText = item.plan ? ` (${item.plan})` : '';
     html += `
       <div class="checkout-item-line">
-        <span>${item.name}${planText} (x${item.quantity})</span>
-        <span>GH₵${itemTotal.toFixed(2)}</span>
+        <span>${item.name} (x${item.quantity})</span>
+        <span>$${itemTotal.toFixed(2)}</span>
       </div>
     `;
   });
 
   summaryContainer.innerHTML = html;
-  totalAmountEl.innerText = `GH₵${total.toFixed(2)}`;
+  totalAmountEl.innerText = `$${total.toFixed(2)}`;
 }
 
 // Wishlist System
@@ -435,7 +423,7 @@ function initWishlistUI() {
       const card = heartBtn.closest('[data-id]');
       if (card) {
         const id = card.getAttribute('data-id');
-        const name = card.getAttribute('data-base-name') || 'Subscription';
+        const name = card.getAttribute('data-name');
         if (wishlist.includes(id)) {
           wishlist = wishlist.filter((item) => item !== id);
           heartBtn.style.color = '';
@@ -464,10 +452,10 @@ function updateWishlistBadge() {
 if (searchBox) {
   searchBox.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
-    const productCards = document.querySelectorAll('.product-card');
+    const productCards = document.querySelectorAll('[data-name]');
 
     productCards.forEach((card) => {
-      const productName = (card.getAttribute('data-base-name') || '').toLowerCase();
+      const productName = card.getAttribute('data-name').toLowerCase();
       if (productName.includes(query)) {
         card.style.display = '';
       } else {
