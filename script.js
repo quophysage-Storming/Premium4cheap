@@ -40,9 +40,22 @@ window.onload = () => {
   }
 
   fadeOut();
+  initProductCardListeners();
   initCartUI();
   initWishlistUI();
 };
+
+function initProductCardListeners() {
+  document.querySelectorAll('.product-card').forEach((card) => {
+    const select = card.querySelector('.plan-select');
+    const priceValEl = card.querySelector('.price-val');
+    if (select && priceValEl) {
+      select.addEventListener('change', () => {
+        priceValEl.innerText = select.value;
+      });
+    }
+  });
+}
 
 function loader() {
   let loaderEl = document.querySelector('.loader-container');
@@ -70,72 +83,44 @@ var booksSwiper = new Swiper('.books-slider', {
   },
 });
 
-var featuredSwiper = new Swiper('.featured-slider', {
-  spaceBetween: 15,
-  loop: true,
-  centeredSlides: true,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  breakpoints: {
-    0: { slidesPerView: 1 },
-    450: { slidesPerView: 2 },
-    768: { slidesPerView: 3 },
-    1024: { slidesPerView: 4 },
-  },
-});
+if (document.querySelector('.featured-slider')) {
+  var featuredSwiper = new Swiper('.featured-slider', {
+    spaceBetween: 15,
+    loop: true,
+    centeredSlides: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      450: { slidesPerView: 2 },
+      768: { slidesPerView: 3 },
+      1024: { slidesPerView: 4 },
+    },
+  });
+}
 
-var arrivalsSwiper = new Swiper('.arrivals-slider', {
-  spaceBetween: 15,
-  loop: true,
-  centeredSlides: true,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
-  breakpoints: {
-    0: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  },
-});
-
-var reviewsSwiper = new Swiper('.reviews-slider', {
-  spaceBetween: 15,
-  grabCursor: true,
-  loop: true,
-  centeredSlides: true,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
-  breakpoints: {
-    0: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  },
-});
-
-var blogsSwiper = new Swiper('.blogs-slider', {
-  spaceBetween: 15,
-  grabCursor: true,
-  loop: true,
-  centeredSlides: true,
-  autoplay: {
-    delay: 5000,
-    disableOnInteraction: false,
-  },
-  breakpoints: {
-    0: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  },
-});
+if (document.querySelector('.arrivals-slider')) {
+  var arrivalsSwiper = new Swiper('.arrivals-slider', {
+    spaceBetween: 15,
+    loop: true,
+    centeredSlides: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+}
 
 // ==========================================
 // E-COMMERCE SHOPPING CART & SELLING SYSTEM
@@ -201,7 +186,7 @@ function renderCart() {
 
   if (cart.length === 0) {
     container.innerHTML = `<div class="empty-cart-msg"><i class="fas fa-shopping-basket"></i><p>Your cart is empty.</p></div>`;
-    totalPriceEl.innerText = '$0.00';
+    totalPriceEl.innerText = 'GH₵0.00';
     return;
   }
 
@@ -216,7 +201,7 @@ function renderCart() {
         <img src="${item.image}" alt="${item.name}">
         <div class="cart-item-details">
           <h4>${item.name}</h4>
-          <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+          <div class="cart-item-price">GH₵${item.price.toFixed(2)}</div>
           <div class="cart-item-qty">
             <button class="qty-btn minus" onclick="changeQuantity('${item.id}', -1)">-</button>
             <span>${item.quantity}</span>
@@ -231,7 +216,7 @@ function renderCart() {
   });
 
   container.innerHTML = html;
-  totalPriceEl.innerText = `$${total.toFixed(2)}`;
+  totalPriceEl.innerText = `GH₵${total.toFixed(2)}`;
 }
 
 // Notification Toast
@@ -289,14 +274,34 @@ function initCartUI() {
     const btn = e.target.closest('.add-to-cart-btn');
     if (btn) {
       e.preventDefault();
-      const card = btn.closest('[data-id]') || btn;
-      const product = {
-        id: card.getAttribute('data-id') || btn.getAttribute('data-id') || 'sub-' + Date.now(),
-        name: card.getAttribute('data-name') || btn.getAttribute('data-name') || 'Subscription Item',
-        price: card.getAttribute('data-price') || btn.getAttribute('data-price') || '4.99',
-        image: card.getAttribute('data-image') || btn.getAttribute('data-image') || 'image/IMG_4277.webp',
-      };
-      addToCart(product);
+      const card = btn.closest('.product-card');
+      if (card) {
+        const title = card.querySelector('h3')?.innerText || 'Subscription';
+        const select = card.querySelector('.plan-select');
+        const selectedOpt = select ? select.options[select.selectedIndex] : null;
+
+        const price = selectedOpt ? selectedOpt.value : '50';
+        const duration = selectedOpt ? selectedOpt.getAttribute('data-duration') : '';
+        const planId = selectedOpt ? selectedOpt.getAttribute('data-id') : 'plan-' + Date.now();
+        const image = card.getAttribute('data-image') || 'image/IMG_4276.webp';
+
+        const fullName = duration ? `${title} (${duration})` : title;
+
+        addToCart({
+          id: planId,
+          name: fullName,
+          price: price,
+          image: image,
+        });
+      } else {
+        const product = {
+          id: btn.getAttribute('data-id') || 'sub-' + Date.now(),
+          name: btn.getAttribute('data-name') || 'Subscription Item',
+          price: btn.getAttribute('data-price') || '50',
+          image: btn.getAttribute('data-image') || 'image/IMG_4277.webp',
+        };
+        addToCart(product);
+      }
     }
   });
 
@@ -383,7 +388,7 @@ function openQuickView(product) {
   currentQuickViewProduct = product;
   document.querySelector('#qv-img').src = product.image;
   document.querySelector('#qv-title').innerText = product.name;
-  document.querySelector('#qv-price').innerText = `$${parseFloat(product.price).toFixed(2)}`;
+  document.querySelector('#qv-price').innerText = `GH₵${parseFloat(product.price).toFixed(2)}`;
   document.querySelector('#qv-desc').innerText = product.desc || 'Premium subscription service with instant account delivery.';
   document.querySelector('.quick-view-modal-container')?.classList.add('active');
 }
@@ -403,13 +408,13 @@ function renderCheckoutSummary() {
     html += `
       <div class="checkout-item-line">
         <span>${item.name} (x${item.quantity})</span>
-        <span>$${itemTotal.toFixed(2)}</span>
+        <span>GH₵${itemTotal.toFixed(2)}</span>
       </div>
     `;
   });
 
   summaryContainer.innerHTML = html;
-  totalAmountEl.innerText = `$${total.toFixed(2)}`;
+  totalAmountEl.innerText = `GH₵${total.toFixed(2)}`;
 }
 
 // Wishlist System
@@ -452,10 +457,10 @@ function updateWishlistBadge() {
 if (searchBox) {
   searchBox.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase().trim();
-    const productCards = document.querySelectorAll('[data-name]');
+    const productCards = document.querySelectorAll('.product-card');
 
     productCards.forEach((card) => {
-      const productName = card.getAttribute('data-name').toLowerCase();
+      const productName = (card.querySelector('h3')?.innerText || '').toLowerCase();
       if (productName.includes(query)) {
         card.style.display = '';
       } else {
