@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Digital Subscriptions Store</title>
+    <title>Premium 4Cheap Subscriptions Store</title>
+    <link rel="icon" href="image/IMG_4281.png" type="image/png">
+    <meta property="og:image" content="image/IMG_4281.png">
+    <meta name="twitter:image" content="image/IMG_4281.png">
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -14,7 +17,7 @@
 
 <header class="header">
     <div class="header-1">
-        <a href="#" class="logo"><i class="fas fa-bolt"></i> Fx-Sub </a>
+        <a href="#" class="logo"><img src="image/IMG_4281.png" alt="Premium 4Cheap" style="height: 4.5rem; object-fit: contain; margin-right: 0.8rem;"> Premium 4Cheap </a>
 
         <form action="" class="search-form" onsubmit="return false;">
             <input type="search" name="" placeholder="Search subscriptions (Netflix, Spotify...)" id="search-box">
@@ -32,9 +35,7 @@
     <div class="header-2">
         <nav class="navbar">
             <a href="#home">home</a>
-            <a href="#featured">featured</a>
-            <a href="#arrivals">popular plans</a>
-            <a href="#reviews">reviews</a>
+            <a href="#arrivals">available plans</a>
         </nav>
     </div>
 </header>
@@ -42,7 +43,6 @@
 <nav class="bottom-navbar">
     <a href="#home" class="fas fa-home"></a>
     <a href="#arrivals" class="fas fa-tags"></a>
-    <a href="#reviews" class="fas fa-comments"></a>
 </nav>
 
 <div class="login-form-container" id="login-form-container">
@@ -149,15 +149,15 @@
         <div class="content">
             <h3>Premium Subscriptions</h3>
             <p>Up to 40% off on official accounts & renewals! Instant digital delivery to your inbox.</p>
-            <a href="#featured" class="btn">explore store</a>
+            <a href="#arrivals" class="btn">explore store</a>
         </div>
 
         <div class="swiper books-slider">
             <div class="swiper-wrapper">
-                <a href="#featured" class="swiper-slide"><img src="image/IMG_4276.webp" alt="Apple Music"></a>
-                <a href="#featured" class="swiper-slide"><img src="image/IMG_4277.webp" alt="Netflix"></a>
-                <a href="#featured" class="swiper-slide"><img src="image/IMG_4278.png" alt="Spotify"></a>
-                <a href="#featured" class="swiper-slide"><img src="image/IMG_4279.png" alt="Snapchat Plus"></a>
+                <a href="#arrivals" class="swiper-slide"><img src="image/IMG_4276.webp" alt="Apple Music"></a>
+                <a href="#arrivals" class="swiper-slide"><img src="image/IMG_4277.webp" alt="Netflix"></a>
+                <a href="#arrivals" class="swiper-slide"><img src="image/IMG_4278.png" alt="Spotify"></a>
+                <a href="#arrivals" class="swiper-slide"><img src="image/IMG_4279.png" alt="Snapchat Plus"></a>
             </div>
         </div>
     </div>
@@ -197,277 +197,83 @@
     </div>
 </section>
 
-<section class="featured" id="featured">
-    <h1 class="heading"><span>Featured Subscriptions</span></h1>
-
-    <div class="swiper featured-slider">
-        <div class="swiper-wrapper" id="featured-products-wrapper">
-            <div class="swiper-slide box" data-id="1" data-name="Apple Music Premium" data-price="4.99" data-oldprice="10.99" data-image="image/IMG_4276.webp" data-desc="Enjoy over 100 million songs">
-                <div class="icons">
-                    <a href="#" class="fas fa-search quick-view-trigger" title="Quick View"></a>
-                    <a href="#" class="fas fa-heart wishlist-trigger" title="Add to Wishlist"></a>
-                    <a href="#" class="fas fa-eye quick-view-trigger" title="Quick View"></a>
-                </div>
-                <div class="image">
-                    <img src="image/IMG_4276.webp" alt="Apple Music">
-                </div>
-                <div class="content">
-                    <h3>Apple Music Premium</h3>
-                    <div class="price">$4.99 <span>$10.99</span></div>
-                    <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> add to cart</button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box" data-id="2" data-name="Netflix 4K Ultra HD" data-price="8.99" data-oldprice="19.99" data-image="image/IMG_4277.webp" data-desc="Stream unlimited movies">
-                <div class="icons">
-                    <a href="#" class="fas fa-search quick-view-trigger" title="Quick View"></a>
-                    <a href="#" class="fas fa-heart wishlist-trigger" title="Add to Wishlist"></a>
-                    <a href="#" class="fas fa-eye quick-view-trigger" title="Quick View"></a>
-                </div>
-                <div class="image">
-                    <img src="image/IMG_4277.webp" alt="Netflix">
-                </div>
-                <div class="content">
-                    <h3>Netflix 4K Ultra HD</h3>
-                    <div class="price">$8.99 <span>$19.99</span></div>
-                    <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> add to cart</button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box" data-id="3" data-name="Spotify Premium Individual" data-price="3.99" data-oldprice="11.99" data-image="image/IMG_4278.png" data-desc="Unlimited music streaming">
-                <div class="icons">
-                    <a href="#" class="fas fa-search quick-view-trigger" title="Quick View"></a>
-                    <a href="#" class="fas fa-heart wishlist-trigger" title="Add to Wishlist"></a>
-                    <a href="#" class="fas fa-eye quick-view-trigger" title="Quick View"></a>
-                </div>
-                <div class="image">
-                    <img src="image/IMG_4278.png" alt="Spotify">
-                </div>
-                <div class="content">
-                    <h3>Spotify Premium Individual</h3>
-                    <div class="price">$3.99 <span>$11.99</span></div>
-                    <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> add to cart</button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box" data-id="4" data-name="Snapchat+ Subscription" data-price="2.99" data-oldprice="3.99" data-image="image/IMG_4279.png" data-desc="Exclusive features">
-                <div class="icons">
-                    <a href="#" class="fas fa-search quick-view-trigger" title="Quick View"></a>
-                    <a href="#" class="fas fa-heart wishlist-trigger" title="Add to Wishlist"></a>
-                    <a href="#" class="fas fa-eye quick-view-trigger" title="Quick View"></a>
-                </div>
-                <div class="image">
-                    <img src="image/IMG_4279.png" alt="Snapchat Plus">
-                </div>
-                <div class="content">
-                    <h3>Snapchat+ Subscription</h3>
-                    <div class="price">$2.99 <span>$3.99</span></div>
-                    <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> add to cart</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-</section>
-
-<section class="newsletter">
-    <form action="" onsubmit="return false;">
-        <h3>Subscribe for Exclusive Promo Codes</h3>
-        <input type="email" name="" placeholder="enter your email" id="newsletter-email" class="box">
-        <input type="submit" value="Subscribe Now" class="btn" id="newsletter-submit">
-    </form>
-</section>
-
 <section class="arrivals" id="arrivals">
-    <h1 class="heading"><span>Popular Plans</span></h1>
-    <div class="swiper arrivals-slider">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide box" data-id="5" data-name="Apple Music Family Plan (1 Year)" data-price="29.99" data-oldprice="59.99" data-image="image/IMG_4276.webp" data-desc="12 months of family streaming">
-                <div class="image">
-                    <img src="image/IMG_4276.webp" alt="Apple Music Family">
-                </div>
-                <div class="content">
-                    <h3>Apple Music Family Plan (1 Year)</h3>
-                    <div class="price">$29.99 <span>$59.99</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <button class="btn add-to-cart-btn" style="margin-top:0.5rem; padding: 0.5rem 1.5rem; font-size:1.4rem;"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-                </div>
+    <h1 class="heading"><span>Available Plans</span></h1>
+    <div class="products-grid">
+        <!-- Apple Music -->
+        <div class="box product-card" data-service="apple-music" data-image="image/IMG_4276.webp">
+            <div class="image">
+                <img src="image/IMG_4276.webp" alt="Apple Music">
             </div>
-
-            <div class="swiper-slide box" data-id="6" data-name="Netflix Standard HD (6 Months)" data-price="24.99" data-oldprice="45.99" data-image="image/IMG_4277.webp" data-desc="6 months subscription">
-                <div class="image">
-                    <img src="image/IMG_4277.webp" alt="Netflix Standard">
+            <div class="content">
+                <h3>Apple Music</h3>
+                <p class="desc">Enjoy ad-free music & spatial audio</p>
+                <div class="plan-selector-group">
+                    <label>Select Plan:</label>
+                    <select class="plan-select">
+                        <option value="50" data-duration="1 Month" data-id="apple-1m">1 Month - GH₵50</option>
+                        <option value="100" data-duration="3 Months" data-id="apple-3m">3 Months - GH₵100</option>
+                    </select>
                 </div>
-                <div class="content">
-                    <h3>Netflix Standard HD (6 Months)</h3>
-                    <div class="price">$24.99 <span>$45.99</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <button class="btn add-to-cart-btn" style="margin-top:0.5rem; padding: 0.5rem 1.5rem; font-size:1.4rem;"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box" data-id="7" data-name="Spotify Duo Plan (1 Year)" data-price="22.99" data-oldprice="42.99" data-image="image/IMG_4278.png" data-desc="1 Year subscription">
-                <div class="image">
-                    <img src="image/IMG_4278.png" alt="Spotify Duo">
-                </div>
-                <div class="content">
-                    <h3>Spotify Duo Plan (1 Year)</h3>
-                    <div class="price">$22.99 <span>$42.99</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <button class="btn add-to-cart-btn" style="margin-top:0.5rem; padding: 0.5rem 1.5rem; font-size:1.4rem;"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-                </div>
-            </div>
-
-            <div class="swiper-slide box" data-id="8" data-name="Snapchat+ Yearly Pass" data-price="19.99" data-oldprice="29.99" data-image="image/IMG_4279.png" data-desc="12 months full access">
-                <div class="image">
-                    <img src="image/IMG_4279.png" alt="Snapchat Plus Yearly">
-                </div>
-                <div class="content">
-                    <h3>Snapchat+ Yearly Pass</h3>
-                    <div class="price">$19.99 <span>$29.99</span></div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <button class="btn add-to-cart-btn" style="margin-top:0.5rem; padding: 0.5rem 1.5rem; font-size:1.4rem;"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-                </div>
+                <div class="price">GH₵<span class="price-val">50</span></div>
+                <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
             </div>
         </div>
-    </div>
-</section>
 
-<section class="deal" id="deal">
-    <div class="content">
-        <h3>Subscription Bundle Deal</h3>
-        <h1>Upto 50% Off</h1>
-        <p>Get Netflix 4K + Spotify Premium + Snapchat+ combined pass for incredible savings. Instant activation guaranteed.</p>
-        <button class="btn add-to-cart-btn" data-id="9" data-name="Ultimate Entertainment Pass (Netflix + Spotify + Snapchat+)" data-price="12.99" data-oldprice="26.99" data-image="image/IMG_4277.webp" data-desc="Bundle deal">Bundle Deal</button>
-    </div>
-
-    <div class="image">
-        <img src="image/IMG_4277.webp" alt="Special Deal">
-    </div>
-</section>
-
-<section class="reviews" id="reviews">
-    <h1 class="heading"><span>Customer Reviews</span></h1>
-
-    <div class="swiper reviews-slider">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide box">
-                <img src="image/pic-1.jpg" alt="">
-                <h3>Salma</h3>
-                <p>Super fast delivery! Got my Spotify Premium login details in less than 2 minutes after checkout.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
+        <!-- Netflix -->
+        <div class="box product-card" data-service="netflix" data-image="image/IMG_4277.webp">
+            <div class="image">
+                <img src="image/IMG_4277.webp" alt="Netflix">
             </div>
-
-            <div class="swiper-slide box">
-                <img src="image/pic-2.jpg" alt="">
-                <h3>Nawal</h3>
-                <p>Saved so much on Netflix 4K subscription! Works perfectly on all my smart TVs without any issues.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+            <div class="content">
+                <h3>Netflix Premium</h3>
+                <p class="desc">Ultra HD 4K streaming movies & TV</p>
+                <div class="plan-selector-group">
+                    <label>Select Plan:</label>
+                    <select class="plan-select">
+                        <option value="30" data-duration="1 Month" data-id="netflix-1m">1 Month - GH₵30</option>
+                    </select>
                 </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="image/pic-3.jpg" alt="">
-                <h3>Yusra</h3>
-                <p>Apple Music lossless sound quality is amazing. Customer support answered all my setup questions instantly.</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-            </div>
-
-            <div class="swiper-slide box">
-                <img src="image/pic-4.jpg" alt="">
-                <h3>Yousef</h3>
-                <p>Snapchat+ pass worked smooth right away. Great prices compared to official monthly plans!</p>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
+                <div class="price">GH₵<span class="price-val">30</span></div>
+                <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
             </div>
         </div>
-    </div>
-</section>
 
-<section class="blogs" id="blogs">
-    <h1 class="heading"><span>Our Guides</span></h1>
-
-    <div class="swiper blogs-slider">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide box">
-                <div class="image">
-                    <img src="image/blog-1.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>How to Transfer Your Music Playlists to Apple Music</h3>
-                    <p>Learn step-by-step how to migrate your favorite songs and playlists effortlessly.</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
+        <!-- Spotify -->
+        <div class="box product-card" data-service="spotify" data-image="image/IMG_4278.png">
+            <div class="image">
+                <img src="image/IMG_4278.png" alt="Spotify">
             </div>
-
-            <div class="swiper-slide box">
-                <div class="image">
-                    <img src="image/blog-2.jpg" alt="">
+            <div class="content">
+                <h3>Spotify Premium</h3>
+                <p class="desc">Unlimited music downloads & ad-free audio</p>
+                <div class="plan-selector-group">
+                    <label>Select Plan:</label>
+                    <select class="plan-select">
+                        <option value="19" data-duration="1 Month" data-id="spotify-1m">1 Month - GH₵19</option>
+                    </select>
                 </div>
-                <div class="content">
-                    <h3>Top 10 Secret Features on Snapchat+ You Didn't Know</h3>
-                    <p>Discover hidden tools, custom themes, and ghost trails in Snapchat Plus.</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
+                <div class="price">GH₵<span class="price-val">19</span></div>
+                <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
             </div>
+        </div>
 
-            <div class="swiper-slide box">
-                <div class="image">
-                    <img src="image/blog-3.jpg" alt="">
+        <!-- Snapchat+ -->
+        <div class="box product-card" data-service="snapchat" data-image="image/IMG_4279.png">
+            <div class="image">
+                <img src="image/IMG_4279.png" alt="Snapchat Plus">
+            </div>
+            <div class="content">
+                <h3>Snapchat+</h3>
+                <p class="desc">Exclusive features & custom app icons</p>
+                <div class="plan-selector-group">
+                    <label>Select Plan:</label>
+                    <select class="plan-select">
+                        <option value="100" data-duration="1 Year" data-id="snapchat-1y">1 Year - GH₵100</option>
+                    </select>
                 </div>
-                <div class="content">
-                    <h3>Maximizing Your Netflix 4K Streaming Quality</h3>
-                    <p>Optimize your internet bandwidth and display settings for crystal clear 4K HDR playback.</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
+                <div class="price">GH₵<span class="price-val">100</span></div>
+                <button class="btn add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
             </div>
         </div>
     </div>
@@ -476,37 +282,15 @@
 <section class="footer">
     <div class="box-container">
         <div class="box">
-            <h3>our locations</h3>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> Egypt </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> USA </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> Russia </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> England </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> Japan </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> France </a>
-        </div>
-
-        <div class="box">
             <h3>quick links</h3>
             <a href="#home"> <i class="fas fa-arrow-right"></i> home </a>
-            <a href="#featured"> <i class="fas fa-arrow-right"></i> featured </a>
-            <a href="#arrivals"> <i class="fas fa-arrow-right"></i> popular plans </a>
-            <a href="#reviews"> <i class="fas fa-arrow-right"></i> reviews </a>
-            <a href="#blogs"> <i class="fas fa-arrow-right"></i> blogs </a>
-        </div>
-
-        <div class="box">
-            <h3>extra links</h3>
-            <a href="#"> <i class="fas fa-arrow-right"></i> account info </a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> ordered items </a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> privacy policy </a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> payment method </a>
-            <a href="#"> <i class="fas fa-arrow-right"></i> our services </a>
+            <a href="#arrivals"> <i class="fas fa-arrow-right"></i> available plans </a>
         </div>
 
         <div class="box">
             <h3>contact info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +20 1116986853 </a>
-            <a href="#"> <i class="fas fa-envelope"></i> ag242938@gmail.com </a>
+            <a href="#"> <i class="fas fa-phone"></i> +233 20 000 0000 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> support@premium4cheap.com </a>
         </div>
     </div>
 
