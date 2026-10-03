@@ -8,7 +8,6 @@ if (document.querySelector('#search-btn')) {
   };
 }
 
-let loginForm = document.querySelector('.login-form-container');
 
 if (document.querySelector('#login-btn')) {
   document.querySelector('#login-btn').onclick = () => {

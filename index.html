@@ -57,17 +57,66 @@
 
 <nav class="bottom-navbar">
     <a href="#home" class="fas fa-home"></a>
-    <a href="#featured" class="fas fa-list"></a>
     <a href="#arrivals" class="fas fa-tags"></a>
     <a href="#reviews" class="fas fa-comments"></a>
   
 </nav>
 
-<!-- login form  -->
+<!-- Shopping Cart Modal Container -->
+<div class="cart-modal-container">
+    <div class="cart-modal">
+        <div id="close-cart-btn" class="fas fa-times"></div>
+        <h3><i class="fas fa-shopping-bag"></i> Your Shopping Cart</h3>
+        <div class="cart-items-container">
+            <!-- Dynamic Cart Items Rendered via JavaScript -->
+        </div>
+        <div class="cart-summary">
+            <div class="total-price-box">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn clear-cart-btn" id="clear-cart-btn">Clear Cart</button>
+                <button class="btn checkout-btn" id="open-checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="login-form-container">
+<!-- Checkout Modal Container -->
+<div class="checkout-modal-container">
+    <div class="checkout-modal">
+        <div id="close-checkout-btn" class="fas fa-times"></div>
+        <h3><i class="fas fa-credit-card"></i> Order Checkout</h3>
+        <form id="checkout-form" onsubmit="return false;">
+            <div class="order-summary-box">
+                <h4>Order Summary</h4>
+                <div id="checkout-items-summary"></div>
+                <div class="checkout-total">
+                    <span>Total Amount:</span>
+                    <strong id="checkout-total-amount">$0.00</strong>
+                </div>
+            </div>
 
-    <div id="close-login-btn" class="fas fa-times"></div>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" class="box" placeholder="John Doe" id="checkout-name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email Address (For Instant Delivery)</label>
+                <input type="email" class="box" placeholder="john@example.com" id="checkout-email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Select Payment Method</label>
+                <select class="box" id="checkout-payment-method">
+                    <option value="credit-card">Credit / Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="apple-pay">Apple Pay</option>
+                    <option value="crypto">Cryptocurrency (USDT)</option>
+                </select>
+            </div>
 
     <form action="" onsubmit="return false;">
         <h3>sign in</h3>
@@ -84,6 +133,29 @@
         <p>don't have an account ? <a href="#">create one</a></p>
     </form>
 
+<!-- Quick View Modal Container -->
+<div class="quick-view-modal-container">
+    <div class="quick-view-modal">
+        <div id="close-quickview-btn" class="fas fa-times"></div>
+        <div class="quickview-content">
+            <div class="quickview-image">
+                <img src="" id="qv-img" alt="">
+            </div>
+            <div class="quickview-info">
+                <h3 id="qv-title">Subscription Title</h3>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="price" id="qv-price">$0.00</div>
+                <p id="qv-desc">Description of the subscription plan.</p>
+                <button class="btn" id="qv-add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add To Cart</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Shopping Cart Modal Container -->
@@ -430,7 +502,7 @@
 
 <!-- deal section starts  -->
 
-<section class="deal">
+<section class="deal" id="deal">
 
     <div class="content">
         <h3>Subscription Bundle Deal</h3>
