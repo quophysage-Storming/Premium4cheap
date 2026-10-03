@@ -9,6 +9,18 @@ if (document.querySelector('#search-btn')) {
 }
 
 
+if (document.querySelector('#login-btn')) {
+  document.querySelector('#login-btn').onclick = () => {
+    loginForm.classList.toggle('active');
+  };
+}
+
+if (document.querySelector('#close-login-btn')) {
+  document.querySelector('#close-login-btn').onclick = () => {
+    loginForm.classList.remove('active');
+  };
+}
+
 // Window Scroll & Load Events
 window.onscroll = () => {
   if (searchForm) searchForm.classList.remove('active');
@@ -58,8 +70,60 @@ var booksSwiper = new Swiper('.books-slider', {
   },
 });
 
+var featuredSwiper = new Swiper('.featured-slider', {
+  spaceBetween: 15,
+  loop: true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    450: { slidesPerView: 2 },
+    768: { slidesPerView: 3 },
+    1024: { slidesPerView: 4 },
+  },
+});
+
 var arrivalsSwiper = new Swiper('.arrivals-slider', {
   spaceBetween: 15,
+  loop: true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+  },
+});
+
+var reviewsSwiper = new Swiper('.reviews-slider', {
+  spaceBetween: 15,
+  grabCursor: true,
+  loop: true,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false,
+  },
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+  },
+});
+
+var blogsSwiper = new Swiper('.blogs-slider', {
+  spaceBetween: 15,
+  grabCursor: true,
   loop: true,
   centeredSlides: true,
   autoplay: {
